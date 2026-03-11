@@ -57,8 +57,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   void _finishOnboarding() {
-    // Navigate to Login/Signup when Auth is ready
-    print("Navigate to Auth");
+    if (mounted) {
+      Navigator.pushReplacementNamed(context, '/signup');
+    }
   }
 
   @override

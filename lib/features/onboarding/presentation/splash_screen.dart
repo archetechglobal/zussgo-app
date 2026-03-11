@@ -36,11 +36,25 @@ class _SplashScreenState extends State<SplashScreen>
     _controller.forward();
 
     // Navigate to the onboarding screen after 3 seconds
-    Future.delayed(const Duration(seconds: 3), () {
-      if (mounted) {
-        Navigator.pushReplacementNamed(context, '/onboarding');
-      }
-    });
+    _checkExistingSession();
+  }
+
+  Future<void> _checkExistingSession() async {
+    // Artificial delay for splash screen branding
+    await Future.delayed(const Duration(seconds: 3));
+
+    if (!mounted) return;
+
+    // TODO: Connect to SecureStorageService here [cite: 317]
+    bool hasValidToken = false; // Placeholder for token check logic
+
+    if (hasValidToken) {
+      // Access token valid? Yes -> go to Home Page
+      Navigator.pushReplacementNamed(context, '/home');
+    } else {
+      // First time user -> Onboarding
+      Navigator.pushReplacementNamed(context, '/onboarding');
+    }
   }
 
   @override
